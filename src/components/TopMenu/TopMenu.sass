@@ -1,0 +1,39 @@
+//@use '@styles/_colors' as colors
+@use '../../styles/_colors' as colors
+
+$heightBar: 44px
+
+.top-menu
+    padding-inline: 20px
+    width: 100%
+    height: $heightBar
+    display: flex
+    flex-direction: row
+    align-items: center
+    gap: 20px
+    background-color: colors.$gray-400
+
+    box-sizing: content-box
+    border: 0px solid colors.$gray-300
+    border-bottom-width: 1px
+
+    &_button
+        height: $heightBar
+        color: #A1A1AA
+        padding-inline: 4px
+
+        &.active
+            border: solid #ffffff 0px
+            border-bottom-width: 2px
+            color: #ffffff
+
+        &:hover
+            background-color: colors.$gray-500
+
+    &_button-icon
+        margin-inline: -10px
+        color: #A1A1AA
+        width: $heightBar
+        height: $heightBar
+        &:hover
+            background-color: colors.$gray-500
