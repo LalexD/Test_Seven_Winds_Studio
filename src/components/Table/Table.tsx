@@ -4,7 +4,7 @@ import TableRow from 'src/components/Table/TableRow/TableRow';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'src/lib/store/storeHooks';
 import { dataTableSelector, fetchRowsTable } from 'src/lib/store/tableSlice/tableSlice';
-import { ENTITY_ID } from 'src/lib/constants';
+import { DEF_NEW_ROW, ENTITY_ID } from 'src/lib/constants';
 import { TreeResponse } from 'src/api/Api';
 
 const schema: ITableSchemaItem<TreeResponse>[] = [
@@ -34,7 +34,13 @@ const Table = () => {
             ))}
           </tr>
         </thead>
-        <tbody>{data && data.map((item) => <TableRow key={item.id} item={item} schema={schema} />)}</tbody>
+        <tbody>
+          {data && data.length > 0 ? (
+            data.map((item) => <TableRow key={item.id} item={item} schema={schema} />)
+          ) : (
+            <TableRow item={DEF_NEW_ROW} schema={schema} isNewRow />
+          )}
+        </tbody>
       </table>
     </div>
   );

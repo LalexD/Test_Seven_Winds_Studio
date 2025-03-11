@@ -113,9 +113,13 @@ const tableSlice = createSlice({
           >,
         ) => {
           const parentId = action.meta.arg.outlayRowRequest.parentId;
-          if (action?.payload?.current && !!state.data && parentId) {
+          if (action?.payload?.current) {
             const newItem = action.payload.current as TreeResponse;
-            addItemInParentById(state.data, parentId, newItem);
+            if (parentId && !!state.data) {
+              addItemInParentById(state.data, parentId, newItem);
+            } else {
+              state.data = state.data && state.data?.length > 0 ? [...state.data, newItem] : [newItem];
+            }
             state.editableItemId = null;
             state.newItemParentId = null;
             state.isCountChange = !state.isCountChange;
@@ -134,7 +138,11 @@ const tableSlice = createSlice({
         ) => {
           const deleteId = action.meta.arg.rId;
           if (action?.payload?.changed && !!state.data && deleteId) {
-            deleteItemInChildById(state.data, deleteId);
+            if (state.data.find((item) => item.id === deleteId)) {
+              state.data = state.data.length > 1 ? state.data.filter((item) => item.id !== deleteId) : null;
+            } else {
+              deleteItemInChildById(state.data, deleteId);
+            }
             state.isCountChange = !state.isCountChange;
           }
         },

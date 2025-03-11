@@ -76,7 +76,11 @@ const TableRow = <T extends TreeResponse>(props: ITableRowProps<T>) => {
 
   const controlCell = (
     <div className="table_row_cell_control_wrapper" style={{ marginLeft: `${20 * level}px` }}>
-      <TableRowControl ref={controlRef} handleAddChild={handleAddChildren} handleDelete={() => handleDeleteRow(item)} />
+      <TableRowControl
+        ref={controlRef}
+        handleAddChild={!isNewRow ? handleAddChildren : undefined}
+        handleDelete={() => handleDeleteRow(item)}
+      />
       {controlRef && parentRef && (
         <ConnectLine childRef={controlRef} parentRef={parentRef} isNeedUpdate={isCountTableChange} />
       )}
