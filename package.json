@@ -7,6 +7,7 @@
     "start": "webpack serve --progress",
     "build": "webpack build --progress",
     "genSchemaApi": "rtk-query-codegen --file swagger.json --baseQuery ./src/api/baseQuery.ts --output src/api/schema.ts",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
   "dependencies": {
