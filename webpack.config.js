@@ -1,4 +1,6 @@
 const path = require('path');
+const webpack = require('webpack');
+const dotenv = require('dotenv');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -13,6 +15,8 @@ const PATH_ENTRY = path.join(__dirname, 'src', 'index.tsx');
 const PATH_TEMPLATE_ENTRY = path.join(__dirname, 'public', 'index.html');
 const PATH_PUBLIC_FOLDER = path.join(__dirname, 'public');
 const PATH_OUTPUT_FOLDER = path.join(__dirname, 'build');
+
+dotenv.config();
 
 module.exports = () => {
   const config = {
@@ -85,6 +89,9 @@ module.exports = () => {
             },
           },
         ],
+      }),
+      new webpack.DefinePlugin({
+        'process.env.API_URL': JSON.stringify(process.env.API_URL),
       }),
     ],
   };
