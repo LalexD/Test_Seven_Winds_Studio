@@ -1,7 +1,12 @@
-type CellType = 'string' | 'number';
+export type CellType = 'control' | 'string' | 'number';
 
-export interface ITableSchemaItem<U> {
-  key: U;
+export interface ITableSchemaItem<T> {
+  key: keyof T;
   label: string;
-  type?: CellType;
+  type: CellType;
+}
+
+export interface ITableItemBase {
+  id: number;
+  child?: ITableItemBase[];
 }

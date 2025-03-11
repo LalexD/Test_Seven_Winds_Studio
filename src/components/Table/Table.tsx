@@ -1,17 +1,41 @@
 import { ITableSchemaItem } from 'src/components/Table/Table.types';
 import './Table.style.sass';
+import TableRow from 'src/components/Table/TableRow/TableRow';
+import { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from 'src/lib/store/storeHooks';
+import { dataTableSelector, fetchRowsTable } from 'src/lib/store/tableSlice/tableSlice';
+import { ENTITY_ID } from 'src/lib/constants';
+import { TreeResponse } from 'src/api/Api';
 
-interface ITableProps<T, U extends keyof T = keyof T> {
-  schema: ITableSchemaItem<U>[];
-  data: T[];
-}
+const schema: ITableSchemaItem<TreeResponse>[] = [
+  { key: 'child', label: 'Уровень', type: 'control' },
+  { key: 'rowName', label: 'Наименование работ', type: 'string' },
+  { key: 'mainCosts', label: 'Основная з/п', type: 'number' },
+  { key: 'equipmentCosts', label: 'Оборудование', type: 'number' },
+  { key: 'overheads', label: 'Накладные расходы', type: 'number' },
+  { key: 'estimatedProfit', label: 'Сметная прибыль', type: 'number' },
+];
 
-const Table = <T,>({ schema, data }: ITableProps<T>) => {
+const Table = () => {
+  const data = useAppSelector(dataTableSelector);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchRowsTable(ENTITY_ID));
+  }, []);
+
   return (
-    <div>
-      {data.map((row) => (
-        <div className="table_cell"> {JSON.stringify(row)}</div>
-      ))}
+    <div className="table-wrapper">
+      <table className="table">
+        <thead>
+          <tr>
+            {schema.map((head) => (
+              <th key={head.label}>{head.label}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>{data && data.map((item) => <TableRow key={item.id} item={item} schema={schema} />)}</tbody>
+      </table>
     </div>
   );
 };

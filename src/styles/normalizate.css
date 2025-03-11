@@ -114,12 +114,12 @@ body {
 /**
   Приводим к единому цвету svg-элементы
  */
-svg *[fill] {
+/* svg *[fill] {
   fill: currentColor;
 }
 svg *[stroke] {
   stroke: currentColor;
-}
+} */
 
 /**
   Чиним баг задержки смены цвета при взаимодействии с svg-элементами

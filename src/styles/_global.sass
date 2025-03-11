@@ -15,3 +15,24 @@ body
 
 button
     color: #FFFFFF
+    &:disabled
+        filter: brightness(0.7)
+        pointer-events: none
+
+input
+    border: 1px solid $gray-300
+    border-radius: 6px
+    padding-inline: 10px
+    height: 36px
+    line-height: 130%
+
+.icon-button
+    width: 24px
+    aspect-ratio: 1
+    display: flex
+    justify-content: center
+    align-items: center
+    border-radius: 50%
+
+    &:hover
+        background-color: rgba(0, 0, 0, 0.1)

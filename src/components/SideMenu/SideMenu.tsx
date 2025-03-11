@@ -40,7 +40,7 @@ const SideMenu = ({ project = DEF_PROJECT, items = DEF_PROJECT_ITEMS }: ISideMen
       </div>
       <ul className="side-menu_list">
         {items.map((item) => (
-          <li className={`side-menu_list_item ${activeItem === item && 'active'}`}>
+          <li key={item} className={`side-menu_list_item ${activeItem === item && 'active'}`}>
             <div className="side-menu_list_item_icon">
               <TableIcon />
             </div>
