@@ -1,6 +1,6 @@
 # Тестовое задание на позицию «Frontend-разработчик на React»
 
-[Демо](https://lalexd.github.io/Test_Seven_Winds_Studio/)
+[Демо](https://test-seven-winds-studio-fawn.vercel.app)
 
 ### Выполнил
 
