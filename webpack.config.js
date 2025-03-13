@@ -43,6 +43,13 @@ module.exports = () => {
       compress: true,
       port: 3000,
       historyApiFallback: true,
+      proxy: {
+        '/api': {
+          target: process.env.API_URL || 'http://185.244.172.108:8081',
+          changeOrigin: true,
+          pathRewrite: { '^/api': '' },
+        },
+      },
     },
     module: {
       rules: [
